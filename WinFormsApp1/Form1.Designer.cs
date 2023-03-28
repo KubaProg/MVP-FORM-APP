@@ -76,6 +76,11 @@ namespace WinFormsApp1
             // salary
             // 
             this.salary.Location = new System.Drawing.Point(93, 162);
+            this.salary.Maximum = new decimal(new int[] {
+            200000,
+            0,
+            0,
+            0});
             this.salary.Name = "salary";
             this.salary.Size = new System.Drawing.Size(120, 23);
             this.salary.TabIndex = 3;
@@ -83,6 +88,12 @@ namespace WinFormsApp1
             // occupation
             // 
             this.occupation.FormattingEnabled = true;
+            this.occupation.Items.AddRange(new object[] {
+            "Tester",
+            "Projektant",
+            "Inżynier",
+            "Młodszy programista",
+            "Starszy programista"});
             this.occupation.Location = new System.Drawing.Point(93, 207);
             this.occupation.Name = "occupation";
             this.occupation.Size = new System.Drawing.Size(121, 23);
@@ -214,12 +225,12 @@ namespace WinFormsApp1
             // 
             // listBox
             // 
-            this.listBox.Font = new System.Drawing.Font("Open Sans Extrabold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.listBox.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.listBox.FormattingEnabled = true;
-            this.listBox.ItemHeight = 28;
+            this.listBox.ItemHeight = 20;
             this.listBox.Location = new System.Drawing.Point(323, 32);
             this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(436, 368);
+            this.listBox.Size = new System.Drawing.Size(755, 464);
             this.listBox.TabIndex = 21;
             this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -227,7 +238,7 @@ namespace WinFormsApp1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1184, 561);
             this.Controls.Add(this.listBox);
             this.Controls.Add(this.three);
             this.Controls.Add(this.two);

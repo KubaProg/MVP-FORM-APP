@@ -45,8 +45,26 @@ namespace MVPForm.Presenter
 
         private void _form_Add(object sender, EventArgs e)
         {
-            // zaimplementuj dodawanie do glownej listy tak ze zbierasz dane z formularza, budujesz string i dodajesz do listy
-            employeeView.descriptionText = employeeView._name;
+            // zaimplementuj dodawanie do glownej listy tak ze zbierasz dane z formularza, budujesz string i dodajesz do listy      
+            string employeeInfo = employeeView._name + ","
+                                 + employeeView._surname + ","
+                                 + employeeView._date.Replace(",", ".") + ","
+                                 + employeeView._salary + ","
+                                 + employeeView._occupation + ",";
+            if (employeeView._one)
+            {
+                employeeInfo += "umowa na czas nieokreślony";
+            }else if(employeeView._two)
+            {
+                employeeInfo += "umowa na czas określony";
+            }
+            else
+            {
+                employeeInfo += "umowa zlecenie";
+            }
+       
+            lista.Add(employeeInfo);
+            employeeView.ListBoxData = lista;
         }
 
   

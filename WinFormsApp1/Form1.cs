@@ -42,9 +42,9 @@ namespace WinFormsApp1
 
 
 
-        public bool _one { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool _two { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool _three { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool _one { get => one.Checked; set => one.Checked = value; }
+        public bool _two { get => two.Checked; set => two.Checked = value; }
+        public bool _three { get => three.Checked; set => three.Checked = value; }
         
 
         public event EventHandler Save;
