@@ -47,6 +47,7 @@ namespace WinFormsApp1
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.listBox = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +58,6 @@ namespace WinFormsApp1
             this.dText.Name = "dText";
             this.dText.Size = new System.Drawing.Size(0, 15);
             this.dText.TabIndex = 0;
-            this.dText.Click += new System.EventHandler(this.label1_Click);
             // 
             // textBox1
             // 
@@ -210,11 +210,23 @@ namespace WinFormsApp1
             this.radioButton3.Text = "umowa zlecenie";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
+            // listBox
+            // 
+            this.listBox.Font = new System.Drawing.Font("Open Sans Extrabold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.listBox.FormattingEnabled = true;
+            this.listBox.ItemHeight = 28;
+            this.listBox.Location = new System.Drawing.Point(329, 33);
+            this.listBox.Name = "listBox";
+            this.listBox.Size = new System.Drawing.Size(436, 368);
+            this.listBox.TabIndex = 21;
+            this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.listBox);
             this.Controls.Add(this.radioButton3);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
@@ -262,6 +274,7 @@ namespace WinFormsApp1
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.ListBox listBox;
     }
 }
 

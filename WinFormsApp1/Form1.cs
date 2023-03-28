@@ -22,16 +22,19 @@ namespace WinFormsApp1
         private void btnDodaj_Click(object sender, EventArgs e)
         {
             SaveAttempted?.Invoke(this, EventArgs.Empty);
+            listBox.Items.Add("CHUJ");
+           
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            descriptionText = listBox.SelectedItem.ToString();
         }
     }
 }
