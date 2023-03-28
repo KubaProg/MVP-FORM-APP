@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using MVPForm.Presenter;
 using MVPForm.View;
+
 
 namespace WinFormsApp1
 {
@@ -16,25 +19,64 @@ namespace WinFormsApp1
         }
 
         public string descriptionText { get => dText.Text; set => dText.Text = value; }
+        public string _name { get => name.Text; set => name.Text = value; }
+        public string _surname { get => surname.Text; set => surname.Text = value; }
+        public string _date { get => date.Text; set => date.Text = value; }
+        public string _salary { get => salary.Text; set => salary.Text = value; }
+        public string _occupation { get => occupation.Text; set => occupation.Text = value; }
+        public string _currentLine { get => listBox.SelectedItem.ToString(); set => salary.Text = salary.Text; }
+        public List<String> _listBox { get => listBox.Items.Cast<string>().ToList(); set => listBox.Items.Add(value); }
 
-        public event EventHandler SaveAttempted;
-
-        private void btnDodaj_Click(object sender, EventArgs e)
+        public List<string> ListBoxData
         {
-            SaveAttempted?.Invoke(this, EventArgs.Empty);
-            listBox.Items.Add("CHUJ");
-           
+            get => listBox.Items.Cast<string>().ToList();
+            set
+            {
+                listBox.Items.Clear();
+                if (value != null)
+                {
+                    listBox.Items.AddRange(value.ToArray());
+                }
+            }
+        }
+
+
+
+        public bool _one { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool _two { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool _three { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        
+
+        public event EventHandler Save;
+        public event EventHandler Add;
+        public event EventHandler Load;
+        public event EventHandler Fill;
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            Save?.Invoke(this, EventArgs.Empty);  
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            Add?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            Load?.Invoke(this, EventArgs.Empty);
+        }
+
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Fill?.Invoke(this, EventArgs.Empty);
         }
 
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            descriptionText = listBox.SelectedItem.ToString();
         }
     }
 }
