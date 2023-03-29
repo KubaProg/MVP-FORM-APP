@@ -2,24 +2,34 @@
 
 namespace MVPForm.Model
 {
-    class Employee
+    public class Employee
     {
 
-        private String email;
+        private String name;
+        private String surname;
+        private String date;
+        private String salary;
+        private String occupation;
+        private String contract;
 
-        public String getEmail()
+        public Employee()
         {
-            return this.email;
         }
 
-        public void setEmail(string email)
+        public Employee(string name, string surname, string date, string salary, string occupation, string contract)
         {
-            this.email = email;
+            this.name = name;
+            this.surname = surname;
+            this.date = date;
+            this.salary = salary;
+            this.occupation = occupation;
+            this.contract = contract;
         }
 
-
-
-        // typowa klasa modelu tu wpisujesz pola typu email, numer {get;, set;}
+        public override string ToString()
+        {
+            return base.ToString();
+        }
 
     }
 }

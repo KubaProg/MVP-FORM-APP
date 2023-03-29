@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
+using MVPForm.Model;
 using MVPForm.View;
 
 namespace MVPForm.Presenter
@@ -8,7 +11,8 @@ namespace MVPForm.Presenter
     {
 
         IEmployee employeeView;
-        List<string> lista = new List<String>();
+        public List<string> lista = new List<String>();
+        public List<Employee> employees = new List<Employee>();
 
         public EmployeePresenter(IEmployee employeeView)
         {
@@ -22,13 +26,44 @@ namespace MVPForm.Presenter
         private void _form_Fill(object sender, EventArgs e)
         {
             String currentLine = employeeView._currentLine;
-            // tutaj splituj springa i wsadz dane do formularza na odpowiednie miejsca;
+            string[] splitedData = currentLine.Split(",");
+            employeeView._name = splitedData[0];
+            employeeView._surname = splitedData[1];
+            employeeView._date = splitedData[2];
+            employeeView._salary = splitedData[3];
+            employeeView._occupation = splitedData[4];
+            if (splitedData[5] == "umowa na czas nieokreślony")
+            {
+                employeeView._one = true;
+            }
+            else if(splitedData[5] == "umowa na czas określony")
+            {
+                employeeView._two = true;
+            }
+            else
+            {
+                employeeView._three = true;
+            }
         }
+
 
         private void _form_Save(object sender, EventArgs e)
         {
             lista = employeeView._listBox;
-            // tutaj zaimplementuj zapis (serializacje)
+            for (int i = 0; i < lista.Count; i++)
+            {
+                string[] splitedData = lista[i].Split(",");
+                employees.Add(new Employee(splitedData[0], splitedData[1],
+                                            splitedData[2], splitedData[3],
+                                            splitedData[4], splitedData[5]));
+            }
+
+            // Serializacja do pliku
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Employee>));
+            using (TextWriter writer = new StreamWriter(@"D:\c# projects\lab2\MVP-FORM\WinFormsApp1\Repository\employees.xml"))
+            {
+                serializer.Serialize(writer, employees);
+            }
         }
 
 
@@ -45,7 +80,6 @@ namespace MVPForm.Presenter
 
         private void _form_Add(object sender, EventArgs e)
         {
-            // zaimplementuj dodawanie do glownej listy tak ze zbierasz dane z formularza, budujesz string i dodajesz do listy      
             string employeeInfo = employeeView._name + ","
                                  + employeeView._surname + ","
                                  + employeeView._date.Replace(",", ".") + ","
@@ -66,8 +100,6 @@ namespace MVPForm.Presenter
             lista.Add(employeeInfo);
             employeeView.ListBoxData = lista;
         }
-
-  
 
     }
 }
