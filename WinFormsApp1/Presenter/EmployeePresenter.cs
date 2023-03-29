@@ -4,6 +4,7 @@ using System.IO;
 using System.Xml.Serialization;
 using MVPForm.Model;
 using MVPForm.View;
+using WinFormsApp1.Model;
 
 namespace MVPForm.Presenter
 {
@@ -13,6 +14,7 @@ namespace MVPForm.Presenter
         IEmployee employeeView;
         public List<string> lista = new List<String>();
         public List<Employee> employees = new List<Employee>();
+        public List<Employee> deserializedEmployees = new List<Employee>();
 
         public EmployeePresenter(IEmployee employeeView)
         {
@@ -59,23 +61,67 @@ namespace MVPForm.Presenter
             }
 
             // Serializacja do pliku
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Employee>));
+            serialize();
+        }
+
+        private void serialize()
+        {
+            // Serializacja do pliku
+            XmlSerializer serializer = new XmlSerializer(typeof(EmployeeList));
             using (TextWriter writer = new StreamWriter(@"D:\c# projects\lab2\MVP-FORM\WinFormsApp1\Repository\employees.xml"))
             {
-                serializer.Serialize(writer, employees);
+                EmployeeList employeeList = new EmployeeList();
+                employeeList.Employees = employees;
+                serializer.Serialize(writer, employeeList);
             }
+
+        }
+
+        private List<Employee> deserialize()
+        {
+            // Deserializacja z pliku
+            XmlSerializer serializer = new XmlSerializer(typeof(EmployeeList));
+            using (TextReader reader = new StreamReader(@"D:\c# projects\lab2\MVP-FORM\WinFormsApp1\Repository\employees.xml"))
+            {
+                EmployeeList employeeList = (EmployeeList)serializer.Deserialize(reader);
+                employees = employeeList.Employees;
+            }
+
+            return employees;
+        }
+
+        private void _form_Load(object sender, EventArgs e)
+        {
+           
+            
+                List<Employee> deserialized = deserialize();
+                List<string> lines = mapEmployeeToLine(deserialized);
+                List<string> updatedList = new List<string>(); 
+
+                // Clear the ListBoxData property
+                employeeView.ListBoxData = new List<string>();
+
+                // Add the new data from the lista list
+                for (int i = 0; i < deserialized.Count; i++)
+                {
+                    updatedList.Add(lines[i]);
+                }
+
+                employeeView.ListBoxData = updatedList;
+            
         }
 
 
-        private void _form_Load(object sender, EventArgs e)
-        {    
-            lista = employeeView._listBox;
-            lista.Add("One");
-            lista.Add("Two");
-            lista.Add("Three");
-            employeeView.ListBoxData = lista;
-            // tutaj zaimplementuj odczyt (deserializacje) i wyświetl listy do listboxa
-
+        private List<String> mapEmployeeToLine(List<Employee> desEmployees)
+        {
+            lista.Clear();
+            for(int i =0; i<desEmployees.Count; i++)
+            {
+                lista.Add(desEmployees[i].Name+","+ desEmployees[i].Surname + "," +
+                    desEmployees[i].Date + "," + desEmployees[i].Salary + "," +
+                    desEmployees[i].Occupation + "," + desEmployees[i].Contract);
+            }
+            return lista;
         }
 
         private void _form_Add(object sender, EventArgs e)

@@ -2,6 +2,7 @@
 
 namespace MVPForm.Model
 {
+    [Serializable]
     public class Employee
     {
 
@@ -25,6 +26,13 @@ namespace MVPForm.Model
             this.occupation = occupation;
             this.contract = contract;
         }
+
+        public string Name { get => name; set => name = value; }
+        public string Surname { get => surname; set => surname = value; }
+        public string Date { get => date; set => date = value; }
+        public string Salary { get => salary; set => salary = value; }
+        public string Occupation { get => occupation; set => occupation = value; }
+        public string Contract { get => contract; set => contract = value; }
 
         public override string ToString()
         {

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfEmployee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Employee />
-  <Employee />
-</ArrayOfEmployee>
+<Employees xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Employee>
+    <Name>Mlody</Name>
+    <Surname>Arba</Surname>
+    <Date>środa. 29 marca 2023</Date>
+    <Salary>11111</Salary>
+    <Occupation>Tester</Occupation>
+    <Contract>umowa zlecenie</Contract>
+  </Employee>
+</Employees>
