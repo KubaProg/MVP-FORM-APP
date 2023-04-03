@@ -38,7 +38,7 @@ namespace MVPForm.Presenter
             {
                 employeeView._one = true;
             }
-            else if(splitedData[5] == "umowa na czas określony")
+            else if (splitedData[5] == "umowa na czas określony")
             {
                 employeeView._two = true;
             }
@@ -92,32 +92,32 @@ namespace MVPForm.Presenter
 
         private void _form_Load(object sender, EventArgs e)
         {
-           
-            
-                List<Employee> deserialized = deserialize();
-                List<string> lines = mapEmployeeToLine(deserialized);
-                List<string> updatedList = new List<string>(); 
 
-                // Clear the ListBoxData property
-                employeeView.ListBoxData = new List<string>();
 
-                // Add the new data from the lista list
-                for (int i = 0; i < deserialized.Count; i++)
-                {
-                    updatedList.Add(lines[i]);
-                }
+            List<Employee> deserialized = deserialize();
+            List<string> lines = mapEmployeeToLine(deserialized);
+            List<string> updatedList = new List<string>();
 
-                employeeView.ListBoxData = updatedList;
-            
+            // Clear the ListBoxData property
+            employeeView.ListBoxData = new List<string>();
+
+            // Add the new data from the lista list
+            for (int i = 0; i < deserialized.Count; i++)
+            {
+                updatedList.Add(lines[i]);
+            }
+
+            employeeView.ListBoxData = updatedList;
+
         }
 
 
         private List<String> mapEmployeeToLine(List<Employee> desEmployees)
         {
             lista.Clear();
-            for(int i =0; i<desEmployees.Count; i++)
+            for (int i = 0; i < desEmployees.Count; i++)
             {
-                lista.Add(desEmployees[i].Name+","+ desEmployees[i].Surname + "," +
+                lista.Add(desEmployees[i].Name + "," + desEmployees[i].Surname + "," +
                     desEmployees[i].Date + "," + desEmployees[i].Salary + "," +
                     desEmployees[i].Occupation + "," + desEmployees[i].Contract);
             }
@@ -126,25 +126,35 @@ namespace MVPForm.Presenter
 
         private void _form_Add(object sender, EventArgs e)
         {
-            string employeeInfo = employeeView._name + ","
-                                 + employeeView._surname + ","
-                                 + employeeView._date.Replace(",", ".") + ","
-                                 + employeeView._salary + ","
-                                 + employeeView._occupation + ",";
-            if (employeeView._one)
+            if (!string.IsNullOrEmpty(employeeView._name) &&
+              !string.IsNullOrEmpty(employeeView._surname) &&
+              !string.IsNullOrEmpty(employeeView._date) &&
+              !string.IsNullOrEmpty(employeeView._salary) &&
+              !string.IsNullOrEmpty(employeeView._occupation) &&
+              (employeeView._one || employeeView._two || employeeView._three))
             {
-                employeeInfo += "umowa na czas nieokreślony";
-            }else if(employeeView._two)
-            {
-                employeeInfo += "umowa na czas określony";
-            }
-            else
-            {
-                employeeInfo += "umowa zlecenie";
+                string employeeInfo = employeeView._name + ","
+                            + employeeView._surname + ","
+                            + employeeView._date.Replace(",", ".") + ","
+                            + employeeView._salary + ","
+                            + employeeView._occupation + ",";
+                if (employeeView._one)
+                {
+                    employeeInfo += "umowa na czas nieokreślony";
+                }
+                else if (employeeView._two)
+                {
+                    employeeInfo += "umowa na czas określony";
+                }
+                else
+                {
+                    employeeInfo += "umowa zlecenie";
+                }
+
+                lista.Add(employeeInfo);
+                employeeView.ListBoxData = lista;
             }
        
-            lista.Add(employeeInfo);
-            employeeView.ListBoxData = lista;
         }
 
     }
